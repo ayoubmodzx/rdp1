@@ -1,0 +1,11 @@
+<user-mapping>
+    <authorize username="guacuser" password="guacpassword">
+        <connection name="RDP-Desktop">
+            <protocol>rdp</protocol>
+            <param name="hostname">localhost</param>
+            <param name="port">3389</param>
+            <param name="username">rdpuser</param>
+            <param name="password">rdppassword</param>
+        </connection>
+    </authorize>
+</user-mapping>
