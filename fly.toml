@@ -1,0 +1,39 @@
+app = "guacamole-rdp"
+primary_region = "fra"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  GUACAMOLE_HOME = "/etc/guacamole"
+
+[mounts]
+  source = "guacamole_data"
+  destination = "/etc/guacamole"
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+[[services]]
+  internal_port = 3389
+  protocol = "tcp"
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 3389
+    handlers = ["tcp"]
+
+[[vm]]
+  memory = "2gb"
+  cpu_kind = "shared"
+  cpus = 2
