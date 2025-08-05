@@ -1,0 +1,29 @@
+app = "rdp-server"
+primary_region = "fra"
+
+[build]
+  image = "linuxserver/xrdp:latest"
+
+[env]
+  PUID = "1000"
+  PGID = "1000"
+  TZ = "Etc/UTC"
+  USER_PASSWORD = "securepassword123"
+
+[mounts]
+  source = "rdp_data"
+  destination = "/config"
+
+[[services]]
+  internal_port = 3389
+  protocol = "tcp"
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 3389
+    handlers = ["tcp"]
+
+[[vm]]
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
